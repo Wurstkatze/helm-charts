@@ -19,7 +19,10 @@ jobs:
             let content = "";
             if (context.payload.pull_request) {
               const parsedTitle = context.payload.pull_request.title.match(/^\[([a-z]+(?:, [a-z]+)*)\].+$/);
+              console.log('got parsedTitle:', parsedTitle);
+              console.log('got parsedTitle[1]:', parsedTitle[1]);
               content = parsedTitle ? parsedTitle[1] : "";
+              console.log('got content:', content);
             } else {
               content = context.payload.issue.body.split(/### Affected Helm charts/)[1] || "";
             }
@@ -33,6 +36,7 @@ jobs:
               .split(",")
               .map((s) => s.trim())
               .filter((s) => s && existingLabels.has(s));
+            console.log('got labels:', labels);
             if (labels.length) {
               await github.rest.issues.addLabels({
                 ...context.repo,
