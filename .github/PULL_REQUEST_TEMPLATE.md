@@ -4,6 +4,9 @@
  - Describe the scope of your change - i.e. what the change does.
  - Describe any known limitations with your change.
  - Please run any tests or examples that can exercise your modified code.
+ - Labels are automatically applied when they are inside the square brackets of your PR title on opening. Examples:
+   - [redis]: adds `redis` label
+   - [redis, valkey] Adds `redis` and `valkey` labels
 
  Thank you for contributing! We will try to test and integrate the change as soon as we can.
  -->
