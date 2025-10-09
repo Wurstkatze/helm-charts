@@ -13,11 +13,18 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const labels = (context.payload.issue.body.split(/### Affected Helm charts/)[1] || "")
+            const { data } = await github.rest.issues.listLabelsForRepo({
+              ...context.repo,
+              per_page: 100,
+            });
+            const existingLabels = new Set(data.map((l) => l.name));
+            const labels = (
+              context.payload.issue.body.split(/### Affected Helm charts/)[1] || ""
+            )
               .trim()
               .split(",")
               .map((s) => s.trim())
-              .filter((s) => s && s !== "_No response_");
+              .filter((s) => s && existingLabels.has(s));
             if (labels.length) {
               await github.rest.issues.addLabels({
                 ...context.repo,

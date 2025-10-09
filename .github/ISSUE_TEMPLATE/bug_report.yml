@@ -69,5 +69,6 @@ body:
         - timescaledb
         - valkey
         - zookeeper
+        - not-existing-label
     validations:
       required: true
