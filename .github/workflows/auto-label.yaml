@@ -17,7 +17,7 @@ jobs:
           script: |
             let content = "";
             if (context.payload.pull_request) {
-              const parsedTitle = context.payload.pull_request.title.match(/^\[([a-z]+(?:, [a-z]+)*)\].+$);
+              const parsedTitle = context.payload.pull_request.title.match(/^\[([a-z]+(?:, [a-z]+)*)\].+$/);
               content = parsedTitle ? parsedTitle[1] : "";
             } else {
               content = context.payload.issue.body.split(/### Affected Helm charts/)[1] || "";
